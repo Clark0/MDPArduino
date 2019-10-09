@@ -139,7 +139,7 @@ void sendIRtoPC() {
 
   irSamples(50);
 //to check raw values
- checkRawValues();
+// checkRawValues();
 
 // read median , converted from float to integer
 //      Serial.println("obs:"+String(median(irArr1,25))+"|"

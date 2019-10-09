@@ -33,7 +33,7 @@ void caliDistance()
 {
   //Serial.println("CaliDistance();");
   //irSamples();
-  int dist = 5;
+  int dist = 4;
 
   while (readIR2() > dist && readIR3() > dist && readIR4() > dist)
   {
