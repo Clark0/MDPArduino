@@ -1,23 +1,26 @@
 void caliRight()
 {
-  //Serial.println("CaliRight();");
+
   int countc = 0;
   bool tried_left = false;
   bool tried_right = false;
-  float ir_diff = readIR5() - readIR6();
+
+  int cRsamples = 7;
+  irSamples(cRsamples);
+  float ir_diff = median(irArr5,7) - median(irArr6,7);
 
   while (abs(ir_diff) > 0.2 && countc < 100 && not(tried_left && tried_right))
   {
 
     //delay(10);
 
-    if (ir_diff < 0)
+    if (ir_diff < 0.2)
     {
       //left
       rotateLeft(0);
       tried_left = true;
     }
-    else if (ir_diff > 0)
+    else if (ir_diff > 0.2)
     {
       //right
       rotateRight(0);
@@ -25,7 +28,8 @@ void caliRight()
       tried_right = true;
     }
     countc++;
-    ir_diff = readIR5() - readIR6();
+    irSamples(cRsamples);
+    ir_diff = median(irArr5,7) - median(irArr6,7);
   }
 }
 

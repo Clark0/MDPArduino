@@ -124,6 +124,11 @@ void rotateRight(double grid)
   if (grid == 0)
     tickTarget = 1;
 
+  //if (strght_trig == true){
+   // tickTarget = 400;
+   // strght_trig = false;
+ // }
+
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget)
   {
 
@@ -164,6 +169,12 @@ void rotateLeft(double grid)
 
   if (grid == 0)
     tickTarget = 1;
+
+  //if (strght_trig == true){
+  //  tickTarget = 400;
+  //  strght_trig = false; 
+ // }
+    
 
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget)
   {

@@ -73,19 +73,19 @@ float irSamples(int maxnum) {
 
 
 
-float median(int nums[], int n) {
+float median(float nums[], int n) {
   int k = n % 2 == 0 ? n / 2 : n / 2 + 1;
   return qselect(nums, 0, n - 1, k - 1);
 }
 
-float qselect(int A[], int start, int end, int k) {
+float qselect(float A[], int start, int end, int k) {
   if (start == end) {
     return A[start];
   }
 
   int left = start, right = end;
   int index = (left + right) / 2;
-  int pivot = A[index];
+  float pivot = A[index];
 
   while (left <= right) {
     while (left <= right && A[left] > pivot) {
@@ -115,25 +115,6 @@ float qselect(int A[], int start, int end, int k) {
   return A[right + 1];
 }
 
-// get the highest numbers of time occurance
-int mode(int a[],int n) {
-   int maxValue = 0, maxCount = 0, i, j;
-
-   for (i = 0; i < n; ++i) {
-      int count = 0;
-      
-      for (j = 0; j < n; ++j) {
-         if (a[j] == a[i])
-         ++count;
-      }
-      
-      if (count > maxCount) {
-         maxCount = count;
-         maxValue = a[i];
-      }
-   }
-   return maxValue;
-}
 
 void sendIRtoPC() {
 
@@ -141,43 +122,15 @@ void sendIRtoPC() {
 //to check raw values
 // checkRawValues();
 
-// read median , converted from float to integer
-//      Serial.println("obs:"+String(median(irArr1,25))+"|"
-//                      +String(median(irArr2,25))+"|"
-//                      +String(median(irArr3,25))+"|"
-//                      +String(median(irArr4,25))+"|"
-//                      +String(median(irArr5,25))+"|"
-//                      +String(median(irArr6,25))
-//                 );
-
-//  for (int i = 0; i < 3; i++){
-//    // get median three times
-//    irSamples();
-//    irArr1Median[i] = estLong(median(irArr1,50));
-//    irArr2Median[i] = estShort(median(irArr2,50));
-//    irArr3Median[i] = estShort(median(irArr3,50));
-//    irArr4Median[i] = estShort(median(irArr4,50));
-//    irArr5Median[i] = estShort(median(irArr5,50));
-//    irArr6Median[i] = estShort(median(irArr6,50));
-//  }
-//
-//  Serial.println("obs:mode"+String(mode(irArr1Median,3)) + "|"
-//                + String(mode(irArr2Median,3)) + "|"
-//                + String(mode(irArr3Median,3)) + "|"
-//                + String(mode(irArr4Median,3)) + "|"
-//                + String(mode(irArr5Median,3)) + "|"
-//                + String(mode(irArr6Median,3))
-//                );
-
   // filtered reading to return in grids
 
-  //auto-call
+  //automated front calibration
 //  if((estShort(median(irArr2, 50))<4 && estShortFR(median(irArr4, 50))<4) 
 //    ||(estShort(median(irArr2, 50))<4 && estShortFM(median(irArr3, 50))<4)
 //    ||(estShortFM(median(irArr3, 50))<4 && estShortFR(median(irArr4, 50)))<4) {
 //       caliFront();
 //    }
-//  
+ 
   Serial.println("obs:" + String(estLong(median(irArr1, 50))) + "|"
                  + String(estShort(median(irArr2, 50))) + "|"
                  + String(estShortFM(median(irArr3, 50))) + "|"

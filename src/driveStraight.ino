@@ -1,6 +1,7 @@
 void goStraightEX()
 {
   double orientation = 0; 
+  //strght_trig = true;
   
   //Temporary variable for control system(power)
   double power = 300;

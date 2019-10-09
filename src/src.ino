@@ -65,24 +65,16 @@ float distanceCMR5;
 float distanceCMR6;
 
 // read 50 times and store into int array then it returns the median
-int irArr1[50];
-int irArr2[50];
-int irArr3[50];
-int irArr4[50];
-int irArr5[50];
-int irArr6[50];
-
-// get the median and stores in the array 3 times
-int irArr1Median[3];
-int irArr2Median[3];
-int irArr3Median[3];
-int irArr4Median[3];
-int irArr5Median[3];
-int irArr6Median[3];
+float irArr1[50];
+float irArr2[50];
+float irArr3[50];
+float irArr4[50];
+float irArr5[50];
+float irArr6[50];
 
 // For receiving commands from Rpi
 int command;
-int prev_command = 0; // not in use
+bool strght_trig = false; 
 
 void setup() {
   // put your setup code here, to run once:
