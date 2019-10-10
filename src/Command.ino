@@ -24,14 +24,14 @@ void executeCommand() {
     sendIRtoPC();
   } else if (command == 71) { // calibrate top right wall hugging  G
     caliFront();
-    Serial.println("obs:done");
-    // note that obs:done command is sent
+    Serial.println("cali:done");
+    // note that cali:done command is sent
   }else if (command == 72) { // calibrate top right wall hugging  H
     caliAngle();
-    // note that obs:done command is sent
+    // note that cali:done command is sent
   } else if (command == 73) { // calbirate right way hugging - I
     caliRight();
-    Serial.println("obs:done");
+    Serial.println("cali:done");
   } else if (command == 82) { // Send sensor reading - R
     sendIRtoPC();
   } else if (command > 0 || command <= 15 && ((command != 74) || (command != 75) || (command != 76) || (command != 72))) { // 1 grid to 15 grids

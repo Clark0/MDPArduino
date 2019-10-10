@@ -67,7 +67,7 @@ void caliAngle()
   caliRight();
   caliRight();
   caliRight();
-  Serial.println("obs:done");
+  Serial.println("cali:done");
 }
 
 void caliFront()
