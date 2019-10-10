@@ -4,7 +4,7 @@ void goStraightEX()
   //strght_trig = true;
   
   //Temporary variable for control system(power)
-  double power = 300;
+  double power = 350;//300
   double powerLeft = power; //default = 250
   double powerRight = power;
   double diffValue = 0;

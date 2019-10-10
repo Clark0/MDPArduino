@@ -36,7 +36,6 @@ void executeCommand() {
     sendIRtoPC();
   } else if (command > 0 || command <= 15 && ((command != 74) || (command != 75) || (command != 76) || (command != 72))) { // 1 grid to 15 grids
     forward((command));
-    delay(100);
     sendIRtoPC();
   }
 }

@@ -143,7 +143,7 @@ void sendIRtoPC() {
 
 
 int estShort(float reading) {
-  if (reading < 9.5   && reading > 1) {
+  if (reading < 9.5   && reading > 0) {
     return 1; 
   }
   else if (reading < 19) {
@@ -158,7 +158,7 @@ int estShort(float reading) {
 }
 
 int estShortFM(float reading) {
-  if (reading < 9.5   && reading > 1) {
+  if (reading < 9.5   && reading > 0) {
     return 1; 
   }
   else if (reading < 19 ) {

@@ -35,7 +35,6 @@ void caliRight()
 
 void caliDistance()
 {
-  //Serial.println("CaliDistance();");
   //irSamples();
   int dist = 4;
 
@@ -128,7 +127,6 @@ void caliFront()
   //using Fl and FR from front sensors
   while ((abs(ir_diff) > 0.3) && countc < 100 && not(tried_left && tried_right))
   {
-    // delay(10);
 
     if (ir_diff < 0)
     {

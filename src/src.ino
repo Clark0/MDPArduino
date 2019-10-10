@@ -6,7 +6,7 @@
 #include "SharpIR.h"
 
 
-// version 12 HWLAB2 new
+// version 16 working version
 
 #define M1E1Right 3
 #define M2E2Left 13
@@ -113,5 +113,4 @@ void loop() {
   {
     executeCommand();
   }
-  delay(1);
 }
