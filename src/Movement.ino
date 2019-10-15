@@ -122,7 +122,7 @@ void rotateRight(double grid)
   PID_right.SetSampleTime(sampleTime);
 
   if (grid == 0)
-    tickTarget = 1;
+    tickTarget = 0.5;
 
   //if (strght_trig == true){
    // tickTarget = 400;
@@ -168,7 +168,7 @@ void rotateLeft(double grid)
   PID_left.SetSampleTime(sampleTime);
 
   if (grid == 0)
-    tickTarget = 1;
+    tickTarget = 0.5;
 
   //if (strght_trig == true){
   //  tickTarget = 400;
@@ -212,7 +212,7 @@ void goBackFP(int grid)
   switch (grid)
   {
   case 0:
-    distance = 0.5;
+    distance = 2;
     break;
   case -2:
     distance = 297.16 * 0.707;

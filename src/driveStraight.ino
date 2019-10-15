@@ -58,7 +58,7 @@ void goStraightFP(int grid)
    double distance = 0;
   switch(grid)
   {
-    case 0: distance = 0.5; break;
+    case 0: distance = 2; break;
     case 1: distance = 297.16; break;
     case 2: distance = 590.68; break;
     case 3: distance = 902.6; break;

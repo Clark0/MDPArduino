@@ -36,37 +36,35 @@ void caliRight()
 void caliDistance()
 {
   //irSamples();
+
+  int cDsamples = 7;
+  irSamples(cDsamples);
+  
   int dist = 4;
 
-  while (readIR2() > dist && readIR3() > dist && readIR4() > dist)
+  while (median(irArr2,cDsamples) > dist && median(irArr3,cDsamples) > dist && median(irArr4,cDsamples) > dist)
   {
     goStraightFP(0);
+    irSamples(cDsamples);
   }
 
-  while (readIR2() < dist || readIR3() < dist || readIR4() < dist)
+  while (median(irArr2,cDsamples) < dist || median(irArr3,cDsamples) < dist || median(irArr4,cDsamples) < dist)
   {
     goBackFP(0);
+    irSamples(cDsamples);
   }
-
-  //while((median(irArr2,50) >4.8) && (median(irArr3,50) >4.8) && (median(irArr4,50) >4.8))goStraightFP(0);
-  //while((median(irArr2,50) <4.8) || (median(irArr3,50) <4.8) || (median(irArr4,50) <4.8))goBackFP(0);
 }
 
 void caliAngle()
 {
-  caliRight();
   caliFront();
-  //right
+  caliRight();
   rotateRight(1);
   caliFront();
-  //left
   rotateLeft(1);
   caliFront();
   caliRight();
-  caliRight();
-  caliRight();
-  caliRight();
-  caliRight();
+ 
   Serial.println("cali:done");
 }
 
@@ -77,49 +75,56 @@ void caliFront()
 
   //make robot parallel
 
-  int offsetIR2 = 0;
-  int offsetIR4 = 0;
+//  int offsetIR2 = 0;
+//  int offsetIR4 = 0;
 
-  switch (estShort(readIR2()))
-  {
+//KIV
+//  switch (estShort(readIR2()))
+//  {
+//
+//  case 2:
+//  {
+//    offsetIR2 = 10;
+//    break;
+//  }
+//
+//  case 3:
+//  {
+//    offsetIR2 = 20;
+//    break;
+//  }
+//
+//  default:
+//  {
+//    offsetIR2 = 0;
+//    break;
+//  }
+//  }
+//
+//  switch (estShort(readIR4()))
+//  {
+//
+//  case 2:
+//    offsetIR4 = 10;
+//    break;
+//
+//  case 3:
+//    offsetIR4 = 20;
+//    break;
+//
+//  default:
+//    offsetIR4 = 0;
+//    break;
+//  }
+//  int ir_diff = 0;
+//  ir_diff = ((readIR2() - offsetIR2) - (readIR4() - offsetIR4));
 
-  case 2:
-  {
-    offsetIR2 = 10;
-    break;
-  }
+  int cFsamples = 7;
+  irSamples(cFsamples);
+  float ir_diff = median(irArr2,cFsamples) - median(irArr4,cFsamples);
 
-  case 3:
-  {
-    offsetIR2 = 20;
-    break;
-  }
 
-  default:
-  {
-    offsetIR2 = 0;
-    break;
-  }
-  }
 
-  switch (estShort(readIR4()))
-  {
-
-  case 2:
-    offsetIR4 = 10;
-    break;
-
-  case 3:
-    offsetIR4 = 20;
-    break;
-
-  default:
-    offsetIR4 = 0;
-    break;
-  }
-
-  int ir_diff = 0;
-  ir_diff = ((readIR2() - offsetIR2) - (readIR4() - offsetIR4));
   int countc = 0;
   bool tried_left = false;
   bool tried_right = false;
@@ -143,6 +148,7 @@ void caliFront()
       //  Serial.println("rotating right");
     }
     countc++;
-    ir_diff = (readIR2() - offsetIR2) - (readIR4() - offsetIR4);
+    irSamples(cFsamples);
+    ir_diff = median(irArr2,cFsamples) - median(irArr4,cFsamples);
   }
 }
