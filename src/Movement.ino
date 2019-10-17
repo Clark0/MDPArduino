@@ -104,7 +104,7 @@ void forward(int blockstomove)
 void rotateRight(double grid)
 {
   //Temporary variable for control system(power)
-  double power = 250;
+  double power = 400;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
@@ -114,20 +114,21 @@ void rotateRight(double grid)
   //Clear the current interupt variable
   resetEncoder();
 
-  double tickTarget = 393 * grid;
+  double tickTarget = 369 * grid;
 
   //PID
   PID PID_right(&diffValue, &correction, &orientation, kpRight, kiRight, kdRight, DIRECT);
   PID_right.SetMode(AUTOMATIC);
   PID_right.SetSampleTime(sampleTime);
 
-  if (grid == 0)
-    tickTarget = 0.5;
+   if (grid == 0){
+    tickTarget = 1;
+   }
 
-  //if (strght_trig == true){
-   // tickTarget = 400;
-   // strght_trig = false;
- // }
+    else if (strght_trig == true && grid != 2){
+    tickTarget = 372;
+    strght_trig = false; 
+  }
 
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget)
   {
@@ -151,7 +152,7 @@ void rotateLeft(double grid)
   double orientation = 0;
 
   //Temporary variable for control system(power)
-  double power = 250;
+  double power = 400;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
@@ -160,20 +161,21 @@ void rotateLeft(double grid)
   //Clear the current interupt variable
   resetEncoder();
 
-  double tickTarget = 392 * grid;
+  double tickTarget = 384 * grid;
 
   //PID
   PID PID_left(&diffValue, &correction, &orientation, kpLeft, kiLeft, kdLeft, DIRECT);
   PID_left.SetMode(AUTOMATIC);
   PID_left.SetSampleTime(sampleTime);
 
-  if (grid == 0)
-    tickTarget = 0.5;
-
-  //if (strght_trig == true){
-  //  tickTarget = 400;
-  //  strght_trig = false; 
- // }
+  if (grid == 0 ){
+    tickTarget = 1;
+   }
+   
+  else if (strght_trig == true){
+    tickTarget = 386;
+    strght_trig = false; 
+  }
     
 
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget)
@@ -212,7 +214,7 @@ void goBackFP(int grid)
   switch (grid)
   {
   case 0:
-    distance = 2;
+    distance = 10;
     break;
   case -2:
     distance = 297.16 * 0.707;

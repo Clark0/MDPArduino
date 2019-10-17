@@ -1,4 +1,4 @@
-#include <PID_v1.h>
+  #include <PID_v1.h>
 #include <RunningMedian.h>
 
 #include "DualVNH5019MotorShield.h"
@@ -74,7 +74,7 @@ float irArr6[50];
 
 // For receiving commands from Rpi
 int command;
-bool strght_trig = false; 
+bool strght_trig = false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -97,12 +97,6 @@ void setup() {
   pinMode(irR5, INPUT);
   pinMode(irR6, INPUT);
 
-//  for(int i = 0;i<5 ; i++){
-//  goStraightEX();
-//   resetEncoder();
-//  delay(100);
-//  }
-//caliAngle();
 
   
 }

@@ -1,10 +1,10 @@
 void goStraightEX()
 {
   double orientation = 0; 
-  //strght_trig = true;
+  strght_trig = true;
   
   //Temporary variable for control system(power)
-  double power = 350;//300
+  double power = 400;//300
   double powerLeft = power; //default = 250
   double powerRight = power;
   double diffValue = 0;
@@ -27,8 +27,8 @@ void goStraightEX()
      {
        diffValue = rightLeftTicksDiff();
 
-       powerRight = 0.9969 * power - correction; //
-       powerLeft = power + correction;
+       powerRight = 0.9969* power - correction; //
+       powerLeft = 1 * power + correction;
        
        md.setSpeeds(-1*(int)(powerRight), (int)powerLeft);
               
@@ -42,7 +42,8 @@ void goStraightEX()
 
 void goStraightFP(int grid)
 {
-  double orientation = 0; 
+  double orientation = 0;
+  strght_trig = true; 
   
   //Temporary variable for control system(power)
   double power = 380;
@@ -58,7 +59,7 @@ void goStraightFP(int grid)
    double distance = 0;
   switch(grid)
   {
-    case 0: distance = 2; break;
+    case 0: distance = 10; break;
     case 1: distance = 297.16; break;
     case 2: distance = 590.68; break;
     case 3: distance = 902.6; break;

@@ -3,10 +3,12 @@ float ir_valR4;
 float ir_valR5;
 float ir_valR6; 
 
+int irsampleSize = 10;
+
 //Raw values to OFFSET
 // LEFT LONG 
 float readIR1() {
-  return 4 + 60.374 * pow(map(analogRead(irR1), 0, 1023, 0, 5000) / 1000.0, -1.16) -16;
+  return 4 + 60.374 * pow(map(analogRead(irR1), 0, 1023, 0, 5000) / 1000.0, -1.16) -18.8;
 }// 5,10,18,27,37,53,70
 
 // FRONT LEFT
@@ -35,7 +37,7 @@ float readIR6() {
 }//5,10,20,30
 
 void checkRawValues (){
-  
+ 
 //  Serial.println("obs:"+String(readIR1())+"|"
 //                      +String(readIR2())+"|"
 //                      +String(readIR3())+"|"
@@ -43,19 +45,19 @@ void checkRawValues (){
 //                      +String(readIR5())+"|"
 //                      +String(readIR6())
 //                 );
-        Serial.println("obs:"+String(median(irArr1,50))+"|"
-                      +String(median(irArr2,50))+"|"
-                      +String(median(irArr3,50))+"|"
-                      +String(median(irArr4,50))+"|"
-                      +String(median(irArr5,50))+"|"
-                      +String(median(irArr6,50)));
+        Serial.println("obs:"+String(median(irArr1,irsampleSize))+"|"
+                      +String(median(irArr2,irsampleSize))+"|"
+                      +String(median(irArr3,irsampleSize))+"|"
+                      +String(median(irArr4,irsampleSize))+"|"
+                      +String(median(irArr5,irsampleSize))+"|"
+                      +String(median(irArr6,irsampleSize)));
   }
 
 
 
 
 //collects samples for ir Array
-float irSamples(int maxnum) {
+void irSamples(int maxnum) {
   for (int i = 0; i < maxnum; i++) {
     irArr1[i] = readIR1();
     irArr2[i] = readIR2();
@@ -117,26 +119,25 @@ float qselect(float A[], int start, int end, int k) {
 
 
 void sendIRtoPC() {
-
-  irSamples(50);
+  irSamples(irsampleSize);
 //to check raw values
 // checkRawValues();
 
   // filtered reading to return in grids
 
   //automated front calibration
-//  if((estShort(median(irArr2, 50))<4 && estShortFR(median(irArr4, 50))<4) 
-//    ||(estShort(median(irArr2, 50))<4 && estShortFM(median(irArr3, 50))<4)
-//    ||(estShortFM(median(irArr3, 50))<4 && estShortFR(median(irArr4, 50)))<4) {
+//  if((estShort(median(irArr2, 50))<4 && estShortFR(median(irArr4, irsampleSize))<4) 
+//    ||(estShort(median(irArr2, 50))<4 && estShortFM(median(irArr3, irsampleSize))<4)
+//    ||(estShortFM(median(irArr3, 50))<4 && estShortFR(median(irArr4, irsampleSize)))<4) {
 //       caliFront();
 //    }
  
-  Serial.println("obs:" + String(estLong(median(irArr1, 50))) + "|"
-                 + String(estShort(median(irArr2, 50))) + "|"
-                 + String(estShortFM(median(irArr3, 50))) + "|"
-                 + String(estShortFR(median(irArr4, 50))) + "|"
-                 + String(estShort(median(irArr5, 50))) + "|"
-                 + String(estShort(median(irArr6, 50)))
+  Serial.println("obs:" + String(estLong(median(irArr1, irsampleSize))) + "|"
+                 + String(estShort(median(irArr2, irsampleSize))) + "|"
+                 + String(estShortFM(median(irArr3, irsampleSize))) + "|"
+                 + String(estShortFR(median(irArr4, irsampleSize))) + "|"
+                 + String(estShort(median(irArr5, irsampleSize))) + "|"
+                 + String(estShort(median(irArr6, irsampleSize)))
                 );
 }
 
@@ -199,7 +200,7 @@ int estLong(float reading) {
   else if (reading < 24.5) {
     return 3; 
   }
-  else if (reading < 30) {
+  else if (reading < 31.5) {
     return 4; 
   }
    else if (reading < 42) {
