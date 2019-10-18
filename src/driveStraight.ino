@@ -4,7 +4,7 @@ void goStraightEX()
   strght_trig = true;
   
   //Temporary variable for control system(power)
-  double power = 400;//300
+  double power = 380;//300
   double powerLeft = power; //default = 250
   double powerRight = power;
   double diffValue = 0;
@@ -14,7 +14,7 @@ void goStraightEX()
   resetEncoder();
 
   //Distance
-   double distance = 285.5; 
+   double distance = 285.5; //258 
   
    //PID
    PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);

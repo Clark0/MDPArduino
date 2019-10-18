@@ -3,6 +3,7 @@ void brake()
 {
 
   md.setBrakes(380, 400);
+  // md.setBrakes(280, 350);
 }
 
 void brakeFP()
@@ -104,7 +105,7 @@ void forward(int blockstomove)
 void rotateRight(double grid)
 {
   //Temporary variable for control system(power)
-  double power = 400;
+  double power = 380;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
@@ -114,7 +115,7 @@ void rotateRight(double grid)
   //Clear the current interupt variable
   resetEncoder();
 
-  double tickTarget = 369 * grid;
+  double tickTarget = 380 * grid; //369
 
   //PID
   PID PID_right(&diffValue, &correction, &orientation, kpRight, kiRight, kdRight, DIRECT);
@@ -137,7 +138,7 @@ void rotateRight(double grid)
     {
       diffValue = rightLeftTicksDiff();
 
-      powerRight = power * 0.92 - correction;
+      powerRight = power * 0.9969 - correction; 
       powerLeft = power + correction;
 
       //Execute
@@ -152,7 +153,7 @@ void rotateLeft(double grid)
   double orientation = 0;
 
   //Temporary variable for control system(power)
-  double power = 400;
+  double power = 380;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
@@ -161,7 +162,7 @@ void rotateLeft(double grid)
   //Clear the current interupt variable
   resetEncoder();
 
-  double tickTarget = 384 * grid;
+  double tickTarget = 384 * grid; //384
 
   //PID
   PID PID_left(&diffValue, &correction, &orientation, kpLeft, kiLeft, kdLeft, DIRECT);
@@ -173,7 +174,7 @@ void rotateLeft(double grid)
    }
    
   else if (strght_trig == true){
-    tickTarget = 386;
+    tickTarget = 380; 
     strght_trig = false; 
   }
     
@@ -185,7 +186,7 @@ void rotateLeft(double grid)
     {
 
       diffValue = rightLeftTicksDiff();
-      powerRight = 0.92 * power - correction;
+      powerRight = 0.9969 * power - correction; //0.92
       powerLeft = power + correction;
 
       //Execute
@@ -203,7 +204,7 @@ void goBackFP(int grid)
   double power = 380;
   double powerLeft = power;
   double powerRight = power;
-  double diffValue = 0;
+  double diffValue = 378;
   double correction = 0;
 
   //Clear the current interupt variable

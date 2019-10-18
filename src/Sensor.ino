@@ -18,7 +18,7 @@ float readIR2() {
 
 // FRONT MIDDLE 
 float readIR3() {
-  return 27.728 * pow(map(analogRead(irR3), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5;
+  return 27.728 * pow(map(analogRead(irR3), 0, 1023, 0, 5000) / 1000.0, -1.2045) -4.8;
 }//5,15,24,31
 
 // FRONT RIGHT
@@ -121,7 +121,7 @@ float qselect(float A[], int start, int end, int k) {
 void sendIRtoPC() {
   irSamples(irsampleSize);
 //to check raw values
-// checkRawValues();
+//checkRawValues();
 
   // filtered reading to return in grids
 
@@ -174,13 +174,13 @@ int estShortFM(float reading) {
 }
 
 int estShortFR(float reading) {
-  if (reading < 9.5   && reading > 3) {
+  if (reading < 9.5) {
     return 1; 
   }
   else if (reading < 19) {
     return 2; 
   }
-  else if (reading <= 26) {
+  else if (reading <= 27.1) {
     return 3;  
   }
   else {
@@ -191,7 +191,7 @@ int estShortFR(float reading) {
 
 // 5,10,18,27,37,53,70
 int estLong(float reading) {
-  if (reading <7.2 && reading >=4) {
+  if (reading <7.2) {
     return 1; 
   }
   else if (reading < 16 && reading >=7.2) {
@@ -203,7 +203,7 @@ int estLong(float reading) {
   else if (reading < 31.5) {
     return 4; 
   }
-   else if (reading < 42) {
+   else if (reading < 61) {
     return 5; 
   }
   else {
