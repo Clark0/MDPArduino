@@ -65,7 +65,7 @@ void irSamples(int maxnum) {
     irArr4[i] = readIR4();
     irArr5[i] = readIR5();
     irArr6[i] = readIR6();
-    delay(5);
+    delay(2);
   }
 
   
@@ -131,6 +131,23 @@ void sendIRtoPC() {
 //    ||(estShortFM(median(irArr3, 50))<4 && estShortFR(median(irArr4, irsampleSize)))<4) {
 //       caliFront();
 //    }
+
+
+// cali distance one block
+float block_dis = 9.5;
+
+// front calidistance to any 1 block in range
+//if(median(irArr2, irsampleSize)<block_dis || 
+//   median(irArr3, irsampleSize)<block_dis || 
+//   median(irArr4, irsampleSize)<block_dis )caliDistance();
+
+// cali right with various blocks within range 70% reliability
+//if(
+//  estShort(median(irArr6, irsampleSize)) == 1 &&
+//  (median(irArr5, irsampleSize)) == 17.5
+//  ) caliRight();
+
+ 
  
   Serial.println("obs:" + String(estLong(median(irArr1, irsampleSize))) + "|"
                  + String(estShort(median(irArr2, irsampleSize))) + "|"
@@ -144,7 +161,7 @@ void sendIRtoPC() {
 
 
 int estShort(float reading) {
-  if (reading < 9.5   && reading > 0) {
+  if (reading < 9.5) {
     return 1; 
   }
   else if (reading < 19) {
@@ -159,7 +176,7 @@ int estShort(float reading) {
 }
 
 int estShortFM(float reading) {
-  if (reading < 9.5   && reading > 0) {
+  if (reading < 7.2 ) {
     return 1; 
   }
   else if (reading < 19 ) {
@@ -174,11 +191,12 @@ int estShortFM(float reading) {
 }
 
 int estShortFR(float reading) {
-  if (reading < 9.5) {
+  if (reading < 9.5 ) {
     return 1; 
   }
   else if (reading < 19) {
     return 2; 
+    
   }
   else if (reading <= 27.1) {
     return 3;  
@@ -191,10 +209,10 @@ int estShortFR(float reading) {
 
 // 5,10,18,27,37,53,70
 int estLong(float reading) {
-  if (reading <7.2) {
+  if (reading <7.2 ) {
     return 1; 
   }
-  else if (reading < 16 && reading >=7.2) {
+  else if (reading < 16) {
     return 2; 
   }
   else if (reading < 24.5) {

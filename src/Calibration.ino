@@ -3,23 +3,27 @@ void caliRight()
   bool tried_left = false;
   bool tried_right = false;
 
+
+
+
   int cRsamples = 7;
   irSamples(cRsamples);
   
-  float ir_diff = median(irArr5,7) - median(irArr6,7);
+  float ir_diff = (median(irArr5,7)) - median(irArr6,7);
 
-  while (abs(ir_diff) > 0.2 && not(tried_left && tried_right))
+
+  while (abs(ir_diff) > 0.4 && not(tried_left && tried_right))
   {
 
     //delay(10);
 
-    if (ir_diff < 0.2)
+    if (ir_diff < 0.4)
     {
       //left
       rotateLeft(0);
       tried_left = true;
     }
-    else if (ir_diff > 0.2)
+    else if (ir_diff > 0.4)
     {
       //right
       rotateRight(0);
@@ -27,7 +31,7 @@ void caliRight()
     }
     
     irSamples(cRsamples);
-    ir_diff = median(irArr5,7) - median(irArr6,7);
+    ir_diff = (median(irArr5,7)) - median(irArr6,7);
   }
 }
 
@@ -35,7 +39,7 @@ void caliDistance()
 {
   bool tried_front = false;
   bool tried_back = false;
-  float dist = 4;
+  float dist = 4.9;
   float error = 0.4;
   int cDsamples = 7;
   irSamples(cDsamples);
@@ -56,8 +60,6 @@ void caliDistance()
       irSamples(cDsamples);
       tried_back = true;
     }
-  
- 
   }
 }
 

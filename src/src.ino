@@ -19,6 +19,8 @@
 #define irR6 A5 
 
 
+// Salakau v.1
+
 
 /// PID constant variables
 
@@ -74,7 +76,7 @@ float irArr6[50];
 
 // For receiving commands from Rpi
 int command;
-bool strght_trig = false;
+int strght_trig = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -96,8 +98,6 @@ void setup() {
   pinMode(irR4, INPUT);
   pinMode(irR5, INPUT);
   pinMode(irR6, INPUT);
-
-
   
 }
 

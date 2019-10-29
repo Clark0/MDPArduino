@@ -1,4 +1,5 @@
 // Brakes
+
 void brake()
 {
 
@@ -8,10 +9,10 @@ void brake()
 
 void brakeFP()
 {
-  md.setM1Brake(380);
-  delayMicroseconds(5000);
-  md.setM2Brake(400);
-  delay(50);
+  md.setM1Brake(360); //left
+  //delayMicroseconds(5000);
+  md.setM2Brake(380);
+ // delay(50);
 }
 
 void forward(int blockstomove)
@@ -105,7 +106,7 @@ void forward(int blockstomove)
 void rotateRight(double grid)
 {
   //Temporary variable for control system(power)
-  double power = 380;
+  double power = 300;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
@@ -125,10 +126,13 @@ void rotateRight(double grid)
    if (grid == 0){
     tickTarget = 1;
    }
-
-    else if (strght_trig == true && grid != 2){
+    else if (strght_trig >= 4 && grid != 2){
+    tickTarget = 378;
+    strght_trig = 0; 
+  }
+    else if (strght_trig == 1 && grid != 2){
     tickTarget = 372;
-    strght_trig = false; 
+    strght_trig = 0; 
   }
 
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget)
@@ -153,7 +157,7 @@ void rotateLeft(double grid)
   double orientation = 0;
 
   //Temporary variable for control system(power)
-  double power = 380;
+  double power = 300;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
@@ -171,11 +175,12 @@ void rotateLeft(double grid)
 
   if (grid == 0 ){
     tickTarget = 1;
+    strght_trig = 0; 
    }
    
-  else if (strght_trig == true){
-    tickTarget = 380; 
-    strght_trig = false; 
+  else if (strght_trig == 1 &&  grid != 2){
+    tickTarget = 386; 
+    strght_trig = 0; 
   }
     
 
@@ -204,7 +209,7 @@ void goBackFP(int grid)
   double power = 380;
   double powerLeft = power;
   double powerRight = power;
-  double diffValue = 378;
+  double diffValue = 0;
   double correction = 0;
 
   //Clear the current interupt variable
@@ -215,7 +220,7 @@ void goBackFP(int grid)
   switch (grid)
   {
   case 0:
-    distance = 10;
+    distance = 8;
     break;
   case -2:
     distance = 297.16 * 0.707;
